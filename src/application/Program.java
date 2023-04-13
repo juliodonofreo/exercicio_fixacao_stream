@@ -46,7 +46,14 @@ public class Program {
                     .sorted()
                     .toList();
 
+            double sumNameStartsM = employees
+                    .stream()
+                    .filter(x -> x.getName().toUpperCase().charAt(0) == 'M')
+                    .map(Employee::getSalary)
+                    .reduce(0.0, Double::sum);
+
             moreThanSalaryEmails.forEach(System.out::println);
+            System.out.printf("Sum of salary of people whose name starts with 'M': $%.2f", sumNameStartsM);
         } catch (IOException e) {
             System.out.println("ERROR! " + e.getMessage());;
         }
