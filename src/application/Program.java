@@ -1,11 +1,14 @@
 package application;
 
+import entities.Employee;
+
 import java.io.BufferedReader;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
 import java.net.URISyntaxException;
 import java.nio.file.Path;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
@@ -28,7 +31,16 @@ public class Program {
 
         try (BufferedReader bf = new BufferedReader(new FileReader(path.toFile()))){
 
+            List<Employee> employees = new ArrayList<>();
             List<String> lines = bf.lines().toList();
+
+            for(String line: lines) {
+                String[] fields = line.split(",");
+                Employee employee = new Employee(fields[0], fields[1], Double.parseDouble(fields[2]));
+                employees.add(employee);
+            }
+
+            System.out.println(employees);
         } catch (IOException e) {
             System.out.println("ERROR! " + e.getMessage());;
         }
