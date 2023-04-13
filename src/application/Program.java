@@ -39,8 +39,14 @@ public class Program {
                 Employee employee = new Employee(fields[0], fields[1], Double.parseDouble(fields[2]));
                 employees.add(employee);
             }
+            List<String> moreThanSalaryEmails = employees
+                    .stream()
+                    .filter(x -> x.getSalary() > salary)
+                    .map(Employee::getEmail)
+                    .sorted()
+                    .toList();
 
-            System.out.println(employees);
+            moreThanSalaryEmails.forEach(System.out::println);
         } catch (IOException e) {
             System.out.println("ERROR! " + e.getMessage());;
         }
